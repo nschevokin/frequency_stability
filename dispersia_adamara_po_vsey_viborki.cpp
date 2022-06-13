@@ -5,8 +5,8 @@ using namespace std;
 
 int main()
 {
-    
-    ifstream input_file("PHASE.dat");
+
+    ifstream input_file("PHASE.DAT");
     double num;
     int M=0;
     while (!input_file.eof())
@@ -16,7 +16,7 @@ int main()
     }
     input_file.close();
     M--;
-    ifstream read_file("PHASE.dat");
+    ifstream read_file("PHASE.DAT");
     double y[M];
     for(int i=0;i<M;i++)
     {
@@ -24,14 +24,14 @@ int main()
         cout << y[i] << endl;
     }
     read_file.close();
-    
+
     int m,t;
-    
+
     cout << "m = ";
     cin >> m;
     cout << "t = ";
     cin >> t;
-    
+
     double first =  1 / (6*pow(m,2)*pow(t,2) * (M-3*m+1));
     double sum = 0;
     for (int j = 1 ; j <= (M-3*m+1); j++){
@@ -41,20 +41,20 @@ int main()
         }
         sum += pow(sum_pod,2);
     }
-    
+
     double H = first*sum;
     cout << sqrt(H) << endl;
-    
+
     int N = M + 1;
     first = 1/(6*pow(t,2)*(N-3*m));
     sum =0;
-    
+
     for (int i=1;i<=(M-3*m);i++){
         sum += pow(y[i+3*m] - 3*y[i+2*m] + 3*y[i+m] - y[i],2);
     }
-    
+
     double H2 = first*sum;
     cout << sqrt(H2) << endl;
-    
+
     return 0;
 }
