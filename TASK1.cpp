@@ -1,5 +1,3 @@
-﻿// TASK1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
 #include <iostream>
 #include <fstream>
 #include <cmath>
@@ -79,12 +77,12 @@ FILE* gp[3];
 FILE* output[3];
 int main()
 {
-    gp[0] = _popen("gnuplot -persist", "w");
-    gp[1] = _popen("gnuplot -persist", "w");
-    gp[2] = _popen("gnuplot -persist", "w");
-    fopen_s(&output[0],"Adhamar.dat", "w");
-    fopen_s(&output[1], "AdhamarPh.dat", "w");
-    fopen_s(&output[2], "Theo.dat", "w");
+    gp[0] = popen("gnuplot -persist", "w");
+    gp[1] = popen("gnuplot -persist", "w");
+    gp[2] = popen("gnuplot -persist", "w");
+    output[0]=fopen("Adhamar.dat", "w");
+    output[1]=fopen("AdhamarPh.dat", "w");
+    output[2]=fopen("Theo.dat", "w");
     double A[10] = { 0 };
     double APh[10] = { 0 };
     double T[10] = { 0 };
@@ -115,9 +113,9 @@ int main()
     }
     for (int i = 0; i < 10; i++)
     {
-        fprintf_s(output[0], "%i\t%f\n",i+1,A[i]);
-        fprintf_s(output[1], "%i\t%f\n", i+1, APh[i]);
-        fprintf_s(output[2], "%i\t%f\n", i+1, T[i]);
+        fprintf(output[0], "%i\t%f\n",i+1,A[i]);
+        fprintf(output[1], "%i\t%f\n", i+1, APh[i]);
+        fprintf(output[2], "%i\t%f\n", i+1, T[i]);
     }
     fprintf(gp[0], "plot './Adhamar.dat' with linespoints \n");
     fprintf(gp[1], "plot './AdhamarPh.dat' with linespoints \n");
@@ -126,6 +124,4 @@ int main()
     return 0;
 }
 
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
 
